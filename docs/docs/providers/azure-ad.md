@@ -57,3 +57,17 @@ providers: [
 ...
 
 ```
+
+## Using the Prisma Adapter
+
+The Prisma adapter does not include `ext_expires_in` in the default schema resulting in a `LinkAccoutError` ([example](https://github.com/nextauthjs/next-auth/issues/5454#issuecomment-1262145166)).
+
+To resolve the error, add `ext_expires_in` to the Account model in your Prisma schema. See: https://next-auth.js.org/adapters/prisma#create-the-prisma-schema.
+
+```prisma
+model Account {
+  // ...
+  ext_expires_in    Int? // Required for Azure AD provider to work
+  // ...
+}
+```
